@@ -358,6 +358,9 @@ body.light-mode section + section::before,
 body.light-mode .exhibitions > ul > div:not(:last-child)::after {
     background: linear-gradient(to left, #ececec, #bbb, #ececec);
 }
+body.light-mode header h1 {
+    color: black;
+}
 #theme-toggle {
     position: absolute;
     left: 1.5rem;
@@ -384,4 +387,83 @@ body.light-mode #theme-toggle {
         font-size: 0.95em;
         padding: 0.3em 0.8em;
     }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  color: #222;
+  border-radius: 12px;
+  padding: 2em 1.5em 1.5em 1.5em;
+  max-width: 700px;
+  width: 95%;
+  max-height: 80vh;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+  position: relative;
+  text-align: right;
+  direction: rtl;
+  overflow-y: auto;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  background: none;
+  border: none;
+  font-size: 2em;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.close-btn:focus {
+  outline: 2px solid #4a90e2;
+  background: #e0e0e0;
+}
+.close-btn:hover {
+  color: #222;
+  background: #f0f0f0;
+}
+
+.modal-text p {
+  margin: 0;
+  font-size: 1.1em;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.info-btn {
+  display: inline-block;
+  margin-top: 1em;
+  padding: 0.5em 1.2em;
+  border: 2px solid #4a90e2;
+  background: transparent;
+  color: #4a90e2;
+  border-radius: 9999px;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.info-btn:hover, .info-btn:focus {
+  background: #4a90e2;
+  color: #fff;
+  border-color: #357ab8;
+  outline: none;
 } 
