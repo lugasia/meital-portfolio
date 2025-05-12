@@ -1,0 +1,387 @@
+body {
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    background: #18191a;
+    color: #f3f3f3;
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+}
+
+header {
+    background: #232526;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    padding: 2rem 1rem 1rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+header h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2.2rem;
+    letter-spacing: 0.02em;
+    color: #fff;
+}
+
+header h2 {
+    margin: 0 0 0.5rem 0;
+    font-weight: 400;
+    color: #b0b3b8;
+    font-size: 1.2rem;
+}
+
+.email {
+    color: #4a90e2;
+    font-size: 1rem;
+    margin-bottom: 0;
+    direction: ltr;
+    unicode-bidi: embed;
+}
+
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+section {
+    background: #232526;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.22);
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+    border: 1px solid #333;
+    position: relative;
+}
+
+section + section::before {
+    content: "";
+    display: block;
+    width: 90%;
+    height: 1px;
+    background: linear-gradient(to left, #333, #444, #333);
+    margin: 2.5rem auto 2rem auto;
+    border-radius: 1px;
+    opacity: 0.7;
+}
+
+section h3 {
+    margin-top: 0;
+    color: #f3f3f3;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+}
+/* לשורה של שתי תמונות בלבד */
+.exhibition-images.two-in-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* או - לשתי תמונות בודדות בתוך גריד של 3 */
+  .exhibition-images .wide-two {
+    grid-column: span 3;
+    width: 49%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    display: inline-block;
+  }
+  .exhibition-images .wide-two img,
+  .exhibition-images .wide-two .exhibition-caption {
+    width: 100%;
+  }
+
+section h4 {
+    margin-bottom: 0.5rem;
+    color: #b0b3b8;
+    font-size: 1.1rem;
+}
+.exhibition-images .break-row {
+    grid-column: 1 / -1;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+  }
+
+ul {
+    padding-right: 1.2em;
+    margin: 0 0 1.2em 0;
+}
+
+li {
+    margin-bottom: 0.4em;
+    line-height: 1.7;
+}
+
+.poem p {
+    font-style: italic;
+    color: #b0b3b8;
+    line-height: 2;
+    margin: 0;
+    white-space: pre-line;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem 0 1rem 0;
+    color: #888;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 0 0.5rem;
+    }
+    section {
+        padding: 1rem 0.5rem 0.5rem 0.5rem;
+    }
+    header {
+        padding: 1.2rem 0.5rem 0.5rem 0.5rem;
+    }
+    header h1 {
+        font-size: 1.3rem;
+    }
+}
+
+.exhibitions {
+    /* Same as other sections, but can add custom tweaks if needed */
+}
+
+.exhibitions h3 {
+    text-align: center;
+}
+
+.exhibitions ul {
+    list-style: none;
+    padding-right: 0;
+}
+
+.exhibitions > ul > div {
+    margin-bottom: 3.5em;
+    position: relative;
+}
+
+.exhibitions > ul > div:not(:last-child)::after {
+    content: "";
+    display: block;
+    width: 90%;
+    height: 2px;
+    background: linear-gradient(to left, #333, #444, #333);
+    margin: 2.5em auto 0 auto;
+    border-radius: 1px;
+    opacity: 0.8;
+}
+
+.exhibition-images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 1.2em 0 0 0;
+    justify-items: center;
+    align-items: start;
+}
+
+.exhibition-images li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5em;
+    width: 100%;
+    height: 100%;
+}
+
+.exhibition-images img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    background: #232526;
+    border: 1px solid #444;
+    object-fit: contain;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.exhibition-caption {
+    width: 95%;
+    min-height: 2.2em;
+    margin-top: auto;
+    border: 1px solid #444;
+    border-radius: 6px;
+    background: #18191a;
+    font-size: 0.97em;
+    color: #f3f3f3;
+    padding: 0.4em 0.7em;
+    box-sizing: border-box;
+    resize: vertical;
+    display: block;
+}
+
+@media (max-width: 900px) {
+    .exhibition-images {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 600px) {
+    .exhibition-images {
+        grid-template-columns: 1fr;
+    }
+}
+
+.exhibitions li {
+    margin-bottom: 1.2em;
+    line-height: 1.8;
+}
+
+.exhibitions strong {
+    color: #fff;
+    font-size: 1.08em;
+}
+
+.exhibition-collage {
+    max-width: 98% !important;
+    width: 100%;
+    margin-bottom: 1.5em;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+    border: 2px solid #888;
+}
+@media (max-width: 600px) {
+    .exhibition-collage {
+        max-width: 100% !important;
+    }
+}
+
+.exhibition-images .two-in-row {
+    grid-column: span 1.5;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+.exhibition-images .empty {
+    grid-column: span 1.5;
+    background: none;
+    border: none;
+    pointer-events: none;
+    box-shadow: none;
+    width: 100%;
+    height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.exhibition-images .half-row {
+    grid-column: span 3 / span 3;
+    width: 49%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+}
+.exhibition-images .half-row img,
+.exhibition-images .half-row .exhibition-caption {
+    width: 100%;
+}
+.exhibition-images .half-row:nth-child(odd) {
+    margin-left: 0.5%;
+}
+.exhibition-images .half-row:nth-child(even) {
+    margin-right: 0.5%;
+}
+@media (max-width: 900px) {
+    .exhibition-images .half-row {
+        width: 100%;
+        display: block;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.exhibition-images.two-cols {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.exhibition-images .full-row {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+.exhibition-images .full-row img,
+.exhibition-images .full-row .exhibition-caption {
+    width: 100%;
+}
+
+body.light-mode {
+    background: #f8f7f4;
+    color: #222;
+}
+body.light-mode header {
+    background: #fff;
+    border-bottom: 1px solid #ececec;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+body.light-mode section {
+    background: #fff;
+    border: 1px solid #ececec;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+body.light-mode section h3 {
+    color: #2d2d2d;
+    border-bottom: 1px solid #ececec;
+}
+body.light-mode section h4 {
+    color: #444;
+}
+body.light-mode .poem p {
+    color: #555;
+}
+body.light-mode .exhibitions strong {
+    color: #2d2d2d;
+}
+body.light-mode .exhibition-caption {
+    background: #f6f6f6;
+    color: #444;
+    border: 1px solid #e0e0e0;
+}
+body.light-mode .exhibition-images img {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+}
+body.light-mode .exhibition-collage {
+    border: 2px solid #bdbdbd;
+}
+body.light-mode footer {
+    color: #aaa;
+}
+body.light-mode section + section::before,
+body.light-mode .exhibitions > ul > div:not(:last-child)::after {
+    background: linear-gradient(to left, #ececec, #bbb, #ececec);
+}
+#theme-toggle {
+    position: absolute;
+    left: 1.5rem;
+    top: 1.5rem;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 2em;
+    padding: 0.4em 1.2em;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    z-index: 10;
+}
+body.light-mode #theme-toggle {
+    background: #ececec;
+    color: #222;
+    border: 1px solid #bbb;
+}
+@media (max-width: 600px) {
+    #theme-toggle {
+        left: 0.5rem;
+        top: 0.5rem;
+        font-size: 0.95em;
+        padding: 0.3em 0.8em;
+    }
+} 
