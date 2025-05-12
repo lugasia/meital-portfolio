@@ -311,6 +311,7 @@
       }
     </script>
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
       const openModalBtnMitzufim = document.getElementById('open-modal-btn-mitzufim');
       const closeModalBtnMitzufim = document.getElementById('close-modal-btn-mitzufim');
       const customModalMitzufim = document.getElementById('custom-modal-mitzufim');
@@ -325,6 +326,7 @@
           if (e.target === customModalMitzufim) customModalMitzufim.style.display = 'none';
         };
       }
+    });
     </script>
 </body>
 </html> 
