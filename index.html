@@ -1,362 +1,375 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>תיק עבודות - מיטל סעדון</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מיטל סעדון - תיק עבודות</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 50; align-items: center; justify-content: center; }
+    .modal-overlay.active { display: flex; }
+    .modal-content {
+      background: #fff;
+      border-radius: 1rem;
+      max-width: 800px;
+      width: 95vw;
+      max-height: 90vh;
+      padding: 2rem;
+      position: relative;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+    .close-btn { position: absolute; top: 1rem; left: 1rem; font-size: 1.5rem; color: #888; cursor: pointer; }
+  </style>
 </head>
-<body>
-    <header>
-        <h1>תיק עבודות - מיטל סעדון</h1>
-        <h2>אמנית רב-תחומית</h2>
-        <p class="email">meital.saadon@gmail.com</p>
-        <button id="theme-toggle" aria-label="החלף מצב תאורה" class="p-2 rounded-full border border-gray-300 bg-white dark:bg-gray-800 shadow transition">
-          <span id="theme-icon">
-            <!-- Default: moon icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 dark:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
-            </svg>
-          </span>
-        </button>
-    </header>
-    <main>
-        <section class="artist-statement">
-            <h3>הצהרת אמנית</h3>
-            <p>העבודות שלי מאופיינות בקו עדין, הרמוני ונעים, שעומד בסתירה לתוכן המצוייר, שמתאר יחסים מורכבים שמבטאים בין היתר מצבים של טפילות, פלישה, וחוסר יציבות. הרישום מתעתע, מכיל הומור וכאב. הווידיאו תמיד ליווה את העבודה שלי מאחורי הקלעים, קל היה לי לחשוב בעזרתו ולזקק רעיונות אבל בסופו של דבר הצגתי את הרישומים, בתערוכה האחרונה שלי, לדוג את הטיפות שהצגתי בסיום התואר השני באורנים, הוידיאו קיבל מקום משמעותי, התחושות של הגוף שלי האוחז, מתאמץ, נאבק, מתעד. עזרו לי לדייק את העיסוק שלי בשאלה האחיזה, ובשאלות של שליטה ואובדן שליטה. אני עוסקת בפעולות פשוטות, מרימה את הטלפון ומתעדת, אבל אופן התיעוד והבחירה בנושא טומנות בתוכן תהליכים רגשיים ומורכבים, הקשורים לבנייה והרס גם יחד. החיפוש שלי מונע מתחושת "זמזום פנימי", תחושת דריכות, תזוזה, מאבק. בעבר ראיתי בזמזום הזה תופעה מסתורית, אך לאורך השנים גיליתי שהוא מגלם את המתח בין כוחות ההחזקה והרצון לשמוט. העבודות שלי נולדות מתוך תחושת ערפל, מתוך אי סדר, אני "פוגשת" את הדימוי פעם ראשונה על הדף- הוא לא נמצא אצלי בראש לפני-אני יוצרת קו ומגיבה אליו עד שאני מגלה את הדמות שמופיעה מולי. אני מרגישה שהעבודות שלי מיישירות מבט אל הכואב והפצוע בחברה שלנו, מתבוננות בסבל והתמודדות, אבל יש בקו העדין והנעים גם נחמה, יש ביופי של הוידיאו גם הרמוניה לצד הכאב, אני מביאה את הכאב כמו שהוא, מצד אחד נוכח, כבד ומגושם ומצד שני גם עטוף, ועדין.</p>
-        </section>
-        <section class="cv">
-            <h3>קורות חיים אמנותיים</h3>
-            <h4>השכלה</h4>
-            <ul>
-                <li>2023–2024 – תואר שני רב תחומי במסלול אמנית־מורה, המכללה האקדמית לחינוך אורנים</li>
-                <li>2012–2013 – לימודי המשך באמנות, המדרשה לאמנות, בית ברל</li>
-                <li>2006–2010 – B.Ed באמנות + תעודת הוראה (א–י"ב), המכון לאמנות, מכללת אורנים סיום בהצטיינות יתרה</li>
-            </ul>
-            <h4>תערוכות נבחרות</h4>
-            <ul>
-                <li>2024 – לדוג את הטיפות, תערוכת גמר תואר שני, אורנים | מנחה: הילה בן ארי | אוצר: פאריד אבו שאקרה</li>
-                <li>2018 – תחריטים – סדרות וספרי אמן, הגלריה לאמנות נצרת | אוצרת: טלי כהן גרבוז</li>
-                <li>2014 – אחיזה, גלריית החללית, תל אביב | אוצרת: שרי גולן</li>
-                <li>2013 – שששששש, הגלריה לאמנות ישראלית, כברי | אוצרת: דרורה דקל</li>
-                <li>2012 – Low Tech, ואדי ניסנאס, חיפה | אוצרות: דורית רינגרט ושרון פוליאקין</li>
-                <li>2011 – אבני רוח, גלריה דניאל, תל אביב | אוצר: שרון תובל</li>
-                <li>2011 – תערוכת תחריט, גלריה שהם, תל אביב | אוצרת: עדינה קיי</li>
-                <li>2010 – תערוכה זוגית, הגלריה העירונית ראשון לציון | אוצרת: אפי גן</li>
-                <li>2010 – לצלול עם מצופים, תערוכת גמר תואר ראשון, אורנים | אוצרת: ענת גטניו</li>
-            </ul>
-            <h4>פרסים</h4>
-            <ul>
-                <li>2010 – פרס קרן התרבות אמריקה–ישראל</li>
-            </ul>
-            <h4>הרצאות / סדנאות</h4>
-            <ul>
-                <li>2018 – הרצאה במכון הפסיכואנליטי, תל אביב בנושא רישום בספרי סקיצות</li>
-                <li>2023 – כנס לאומנות נשים ומגדר באוניברסיטת ת"א, הרצאה משותפת עם ד"ר אלה קריגר בנושא עבודת הדחפור</li>
-            </ul>
-            <h4>אוספים</h4>
-            <p>עבודותיי נרכשו על ידי מספר אספנים פרטיים בישראל</p>
-        </section>
-        <section class="selected-works">
-            <h3>עבודות נבחרות (יוכנס בהמשך)</h3>
-            <ul>
-                <li>שם התערוכה: "לצלול עם מצופים"- תערוכת בוגרות המכון לאומנות אורנים.</li>
-                <li>מיצב רישומי, 2010</li>
-                <li>טקסט הפרויקט כולל כמה מקבצים של רישומים.</li>
-                <li>רוב הרישומים נעשו בספרי סקיצות ברישום קווי של עט שחור על נייר.</li>
-                <li>בפרויקט מוצגים כ-70 רישומים שנבחרו מתוך כ-2,000 רישומים משלוש השנים האחרונות.</li>
-                <li>את הרישומים חילקנו לקבוצות: קבוצת האמהות, קבוצת הקרקס, קבוצת הדחויים וסדרת רישומים מספר סקיצות אחד. לקבוצות נוספו סדרת תחריטים שנעשו בשנה האחרונה ונתלו יחד עם הרישומים לפי הקבוצות.</li>
-                <li>בנוסף הוצגו ציור אישה על דלת. צמד מדפי ברזל עם נושאים ציוניים. שלוש עבודות רישום בתוכנת "פלאש". ועבודת פלסטלינה שנעשתה על קיר שבמרכזו קיר לבנים חשוף של לוליינית שהולכת על חבל לעבר לועו של תנין...</li>
-                <li>את הרישומים תליתי על שלושה קירות, חלקם היו ממוסגרים מסגרת לבנה ורובם מכוסים זכוכית בלבד.</li>
-                <li>רציתי ליצור תחושה בה האלמנטים המוצגים מרחפים בחלל, כמו תחושת הריחוף המאפיינת אותם כאשר הם מופיעים בספר הסקיצות שלי.</li>
-                <li>עבודות הרישום עטפו את החלל, הציור שעל הדלת מהווה מעבר מהרישום למדיומים האחרים שכולם רוכזו על קיר הכניסה.</li>
-            </ul>
-        </section>
-        <section class="exhibitions">
-            <h3>רשימת תערוכות</h3>
-            <ul>
-                <div>
-                    <strong>לדוג את הטיפות, 2024</strong><br>
-                    התערוכה בנויה משני חללים סמוכים העוסקים בתמות של החזקה ופלישה. בחלל האחד מוצבת ערימה של מסכי טלוויזיה ומחשב המקרינים סרטונים דוקומנטריים מחצר הריסה; הצופים נעים בזהירות בחדר החשוך והצפוף סביב הערימה, החשופה מכל צד. בחלל השני, המואר באור חם, מוצגים רישומים שנסרקו מתוך ספר ההדרכה "תינוק גדל באהבה", עליו התבצע רישום בקו שחור עם שכבות של טיפקס, מדבקות וכתב דפוס. הרישומים הודפסו בפס רציף העוטף את החדר בגובה נמוך, לצד רישומים מקוריים בוויטרינה. שתי העבודות, השונות באופיין, מבקשות מהצופה תנועה מעגלית ומתמקדות במתח שבין כיסוי לחשיפה, בין אחיזה להתפרקות.
-                    <br><button id="open-modal-btn" class="info-btn">מידע נוסף</button>
-                    <ul class="exhibition-images">
-                        <li><img src="drops-exhibition/Picture32.png" alt="לדוג את הטיפות 1"></li>
-                        <li><img src="drops-exhibition/Picture33.png" alt="לדוג את הטיפות 2"></li>
-                        <li><img src="drops-exhibition/Picture35.png" alt="לדוג את הטיפות 3"></li>
-                        <li><img src="drops-exhibition/Picture37.png" alt="לדוג את הטיפות 4"></li>
-                        <li><img src="drops-exhibition/Picture39.png" alt="לדוג את הטיפות 5"></li>
-                        <li><img src="drops-exhibition/Picture41.png" alt="לדוג את הטיפות 6"></li>
-                        <li><img src="drops-exhibition/Picture42.png" alt="לדוג את הטיפות 7"></li>
-                        <li><img src="drops-exhibition/Picture43.png" alt="לדוג את הטיפות 8"></li>
-                        <li><img src="drops-exhibition/Picture44.png" alt="לדוג את הטיפות 9"></li>
-                        <li><img src="drops-exhibition/Picture45.png" alt="לדוג את הטיפות 10"></li>
-                    </ul>
-                </div>    
-                <div>
-                    <strong>״לולא היו דלתות כלל״</strong> 
-                    בתערוכה זו עבדתי בהשראת השם שנבחר לתערוכה ויצרתי עבודות רדי מייד על גבי דלתות שמצאתי באתר בנייה בקיבוץ – דלתות שירותים צרות ששימשו את חדרי הצעירים. השתמשתי בטכניקת עבודה שפתחתי, המבוססת על שכבות של רישום, מדבקות וטיפקס, אך הפעם על מצע שונה – חומר תעשייתי, גודל חריג ואופי אחר. שמרתי על קצב עבודה מהיר, אינטואיטיבי. עבודות הנייר הוצגו על גבי דלתות של ארונות חשמל שהיו קיימות בחלל הגלריה.
-                    <ul class="exhibition-images two-cols">
-                    <li><img src="לולא היו דלתות כלל/6.jpg" alt="שששששש 10"></li>
-                    <li><img src="לולא היו דלתות כלל/1.jpg" alt="שששששש 10"></li>
-                   
-                </ul>
-                    <ul class="exhibition-images">
-                        <li><img src="לולא היו דלתות כלל/2.png" alt="לולא היו דלתות כלל 30"></li>
-                        <li><img src="לולא היו דלתות כלל/3.png" alt="לולא היו דלתות כלל 29"></li>
-                        <li><img src="לולא היו דלתות כלל/5.jpg" alt="לולא היו דלתות כלל 27"></li>
-                        <li><img src="לולא היו דלתות כלל/8.png" alt="לולא היו דלתות כלל 24"></li>
-                        <li><img src="לולא היו דלתות כלל/9.jpg" alt="לולא היו דלתות כלל 23"></li>
-                        <li><img src="לולא היו דלתות כלל/10.jpg" alt="לולא היו דלתות כלל 22"></li>
-                        <li><img src="לולא היו דלתות כלל/11.jpg" alt="לולא היו דלתות כלל 21"></li>
-                        <li><img src="לולא היו דלתות כלל/12.png" alt="לולא היו דלתות כלל 20"></li>
-                        <li><img src="לולא היו דלתות כלל/13.png" alt="לולא היו דלתות כלל 19"></li>
-                        <li><img src="לולא היו דלתות כלל/14.png" alt="לולא היו דלתות כלל 18"></li>
-                        <li><img src="לולא היו דלתות כלל/15.png" alt="לולא היו דלתות כלל 17"></li>
-                        <li><img src="לולא היו דלתות כלל/16.png" alt="לולא היו דלתות כלל 16"></li>
-                        <li><img src="לולא היו דלתות כלל/17.jpg" alt="לולא היו דלתות כלל 15"></li>
-                        <li><img src="לולא היו דלתות כלל/18.jpg" alt="לולא היו דלתות כלל 14"></li>
-                        <li><img src="לולא היו דלתות כלל/19.png" alt="לולא היו דלתות כלל 13"></li>
-                        <li><img src="לולא היו דלתות כלל/20.png" alt="לולא היו דלתות כלל 12"></li>
-                        <li><img src="לולא היו דלתות כלל/21.png" alt="לולא היו דלתות כלל 11"></li>
-                        <li><img src="לולא היו דלתות כלל/22.png" alt="לולא היו דלתות כלל 10"></li>
-                        <li><img src="לולא היו דלתות כלל/23.png" alt="לולא היו דלתות כלל 9"></li>
-                        <li><img src="לולא היו דלתות כלל/24.png" alt="לולא היו דלתות כלל 8"></li>
-                        <li><img src="לולא היו דלתות כלל/25.jpg" alt="לולא היו דלתות כלל 7"></li>
-                        <li><img src="לולא היו דלתות כלל/26.jpg" alt="לולא היו דלתות כלל 6"></li>
-                        <li><img src="לולא היו דלתות כלל/27.jpg" alt="לולא היו דלתות כלל 5"></li>
-                        <li><img src="לולא היו דלתות כלל/28.png" alt="לולא היו דלתות כלל 4"></li>
-                        <li><img src="לולא היו דלתות כלל/29.png" alt="לולא היו דלתות כלל 3"></li>
-                        <li><img src="לולא היו דלתות כלל/30.png" alt="לולא היו דלתות כלל 2"></li>
-                        <li><img src="לולא היו דלתות כלל/31.png" alt="לולא היו דלתות כלל 1"></li>
-                        
-                        <li class="full-row"><img src="לולא היו דלתות כלל/7.png" alt="לולא היו דלתות כלל 25"></li>
-                    </ul>
-                </div>
-                <div>
-                    <strong>״תינוק גדל באהבה״</strong><br>
-                    "תינוק גדל באהבה", ספר מטופל, עט, טוש אקרילי, טיפקס ומדבקות על גבי דפי הספר. 25*20 ס"מ,<br>
-                    נובמבר 2023<br>
-                    את הספר יצרתי אחרי קיפאון של כמה שבועות, בתגובה לטבח ה-7.10
-                    <ul class="exhibition-images">
-                        <li><img src="תינוק גדל באהבה/1.png" alt="תינוק גדל באהבה 19"></li>
-                        <li><img src="תינוק גדל באהבה/2.png" alt="תינוק גדל באהבה 18"></li>
-                        <li><img src="תינוק גדל באהבה/3.png" alt="תינוק גדל באהבה 17"></li>
-                        <li><img src="תינוק גדל באהבה/4.png" alt="תינוק גדל באהבה 16"></li>
-                        <li><img src="תינוק גדל באהבה/5.png" alt="תינוק גדל באהבה 15"></li>
-                        <li><img src="תינוק גדל באהבה/6.png" alt="תינוק גדל באהבה 14"></li>
-                        <li><img src="תינוק גדל באהבה/7.png" alt="תינוק גדל באהבה 13"></li>
-                        <li><img src="תינוק גדל באהבה/8.png" alt="תינוק גדל באהבה 12"></li>
-                        <li><img src="תינוק גדל באהבה/9.png" alt="תינוק גדל באהבה 11"></li>
-                        <li><img src="תינוק גדל באהבה/10.png" alt="תינוק גדל באהבה 10"></li>
-                        <li><img src="תינוק גדל באהבה/11.png" alt="תינוק גדל באהבה 9"></li>
-                        <li><img src="תינוק גדל באהבה/12.png" alt="תינוק גדל באהבה 8"></li>
-                        <li><img src="תינוק גדל באהבה/13.png" alt="תינוק גדל באהבה 7"></li>
-                        <li><img src="תינוק גדל באהבה/14.png" alt="תינוק גדל באהבה 6"></li>
-                        <li><img src="תינוק גדל באהבה/15.png" alt="תינוק גדל באהבה 5"></li>
-                        <li><img src="תינוק גדל באהבה/16.png" alt="תינוק גדל באהבה 4"></li>
-                        <li><img src="תינוק גדל באהבה/17.png" alt="תינוק גדל באהבה 3"></li>
-                        <li><img src="תינוק גדל באהבה/18.png" alt="תינוק גדל באהבה 2"></li>
-                        <li><img src="תינוק גדל באהבה/19.png" alt="תינוק גדל באהבה 1"></li>
-
-                    </ul>
-                </div>
-                <div>
-                    <strong>עבודה "הדחפור" 2021</strong><br>
-                    הדחפור (וידאו), 23 דקות, 2021
-תיעוד וידאו של הריסת הבית בו חייתי בתקופה משמעותית בחיי, שנהרס במסגרת פרויקט פינוי-בינוי בקיבוץ. העבודה נעשתה באמצעות טלפון נייד וללא חצובה, מתוך בחירה לתעד עם הכלי הזמין והאישי ביותר. עמדתי ללא תנועה, גוף קפוא, מצלמה ביד, בתפקיד של עדה למופע של פירוק והיעלמות.
-העבודה הוצגה בתערוכה קבוצתית בגרנדה- ספרד, והרצתי עליה בשיתוף עם ד"ר אלה קריגר בכנס של העמותה לחקר נשים ומגדר באוניברסיטת תל אביב.
-                    <br><button id="open-modal-btn-dachpor" class="info-btn">מידע נוסף</button>
-                </div> 
-             
-                <div>
-                    <strong>תערוכת הגמר - ״לצלול עם מצופים״</strong><br>
-                    תערוכת בוגרות המכון לאומנות אורנים
-                    מיצב רישומי, 2010
-                    התערוכה כללה כ-70 רישומים נבחרים מתוך כ-2,000 רישומים שנעשו בשלוש השנים שקדמו לתערוכה. רובם בעט שחור על נייר בספרי סקיצות. הרישומים חולקו לקבוצות נושאיות: קבוצת האמהות, הקרקס, הדחויים וסדרת רישומים מספר סקיצות אחד, לצד סדרת תחריטים שנתלתה בהתאם לקבוצות. העבודות הוצגו על שלושה קירות, חלקן ממוסגרות וחלקן מכוסות זכוכית בלבד, ליצירת תחושת ריחוף. בקיר הכניסה הוצגו עבודות ממדיומים נוספים: ציור על דלת, עבודות דיגיטליות בפלאש, צמד מדפי ברזל ועבודת פלסטלינה תלוית קיר.
-                    <br><button id="open-modal-btn-mitzufim" class="info-btn">מידע נוסף</button>
-                    <ul class="exhibition-images two-cols">
-                        <li><img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.27.28.png" alt="שששששש 10"></li>
-                        <li><img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.27.21.png" alt="שששששש 11"></li>
-                        
-                    </ul>
-                    <ul class="exhibition-images">
-                        <li><img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.27.49.png" alt="לצלול עם מצופים 12"></li>
-                        <li><img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.27.53.png" alt="לצלול עם מצופים 11"></li>
-                        <li><img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.27.59.png" alt="לצלול עם מצופים 10"></li>
-                        <li><img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.08.png" alt="לצלול עם מצופים 9"></li>
-                        <li><img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.14.png" alt="לצלול עם מצופים 8"></li>
-                        <li><img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.22.png" alt="לצלול עם מצופים 7"></li>
-                        <li><img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.27.png" alt="לצלול עם מצופים 6"></li>
-                        <li><img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.36.png" alt="לצלול עם מצופים 5"></li>
-                        <li><img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.45.png" alt="לצלול עם מצופים 4"></li>
-                        <li><img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.58.png" alt="לצלול עם מצופים 2"></li>
-                        <li><img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.29.05.png" alt="לצלול עם מצופים 1"></li>
-                        <li><img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.53.png" alt="לצלול עם מצופים collage" class="exhibition-collage"></li>
-                       
-                    </ul>
-                </div>
-                <div>
-                    <strong>תערוכת יחיד - ״שששששש״</strong><br>
-                    גלריה לאומנות ישראלית - קיבוץ כברי - 2013
-                    <ul class="exhibition-images two-cols">
-                        <li><img src="שששששש/Screenshot 2024-04-25 at 13.58.50.png" alt="שששששש 10"></li>
-                        <li><img src="שששששש/Screenshot 2024-04-25 at 13.58.06.png" alt="שששששש 11"></li>
-                    </ul>
-                    <ul class="exhibition-images">
-                        <li><img src="שששששש/Screenshot 2024-04-25 at 14.00.08.png" alt="שששששש 8"></li>
-                        <li><img src="שששששש/Screenshot 2024-04-25 at 14.00.25.png" alt="שששששש 7"></li>
-                        <li><img src="שששששש/Screenshot 2024-04-25 at 14.25.11.png" alt="שששששש 6"></li>
-                        <li><img src="שששששש/Screenshot 2024-04-25 at 14.25.25.png" alt="שששששש 5"></li>
-                        <li><img src="שששששש/Screenshot 2024-04-25 at 14.25.50.png" alt="שששששש 4"></li>
-                        <li><img src="שששששש/Screenshot 2024-04-25 at 14.26.02.png" alt="שששששש 3"></li>
-
-                        <li><img src="שששששש/Screenshot 2024-04-25 at 14.26.44.png" alt="שששששש collage" class="exhibition-collage"></li>
-                        <li><img src="שששששש/Screenshot 2024-04-25 at 14.26.59.png" alt="שששששש 1"></li>
-                       <!-- <li><img src="שששששש/Screenshot 2024-04-25 at 13.59.10.png" alt="שששששש 9"><textarea class="exhibition-caption"></textarea></li> -->
-                    </ul>
-                </div>
-                
-            </ul>
-        </section>
-       
-    </main>
-    <div id="custom-modal" class="modal-overlay" style="display:none;">
-      <div class="modal-content">
-        <button id="close-modal-btn" class="close-btn" aria-label="סגור">&times;</button>
-        <div class="modal-text">
-          <p>
-            לדוג את הטיפות<br>
-אני מתבוננת דרך עדשת מצלמת הוידיאו (שבטלפון שלי) על דחפור שהורס בית בקיבוצי, כחלק
-מפרויקט פינוי בינוי, בית שבו התגוררתי תקופה משמעותית בחיי. מסע שהתחיל כשהתחלתי את לימודי,
-לפני שלוש שנים, לקח אותי דרך עבודת הוידאו לחקור את משמעות החזקת כלי היצירה -מצלמה או
-עט, כפרקטיקות המלוות אותי לאורך השנים. כשאחזתי את המצלמה חשתי את המטען החשמלי בגוף
-והרגשתי שדרך הקיפאון של הגוף והאחיזה במצלמה אני חווה תחושה זהה לזאת שאני חשה בעת
-הרישום. <br>
-ההתבוננות בערימה המשתנה שהבית הפך להיות, גרמה לי לחקור את נושא השכבות, קודם בתחריט
-ולאחר מכן ברישום של עט, מדבקות לבנות וטיפקס. <br>
-בעבודתי אני חוקרת מערכות יחסים שהגבולות בהן לא ברורים, אני מתייחסת למצבים של פולשנות
-וטפילות, אי-יציבות, תעתוע, חוסר עקביות, ערעור הקרקע והיסודות. אני מנסה לעבד את החוויה
-הגופנית שנעה על הציר בין להחזיק ולשמוט.<br>
-באמצעות רישום המערב חומרים שונים אני בוחנת גבולות ופריצתם. מעניינים אותי שאריות המאבק
-והסימנים שנשארים כשקו או כתם פולשים למרחב חדש, מעניינות אותי המחיקות ויצירת הדימוי הסופי
-מתוך "מאבקים" המתקיימים על הנייר. מעניין אותי המחול הזה שמתרחש בין הראש לבין הלב בתהליך
-הרישום שלי. אני חשה דיאלוג בין אינטואיציה חזקה לבין הכרעות שמתקבלות, בין היצירה
-האינטואיטיבית והטביעה בכאוס לבין המחשבה על הדימוי המתקיימת בו בזמן. <br>
-אני תוהה מה מן הדיאלוג הזה עובר לצופה?
-          </p>
+<body class="bg-gray-50 text-gray-900 font-sans">
+  <!-- Hero Section -->
+  <header class="bg-gradient-to-l from-indigo-200 via-pink-100 to-yellow-100 py-16 mb-8 shadow">
+    <div class="container mx-auto px-4 flex flex-col items-center">
+      <!-- You can add a portrait here if you want -->
+      <h1 class="text-4xl font-extrabold mb-2">מיטל סעדון</h1>
+      <h2 class="text-xl font-medium text-indigo-700 mb-4">אמנית רב-תחומית</h2>
+      <p class="max-w-xl text-center text-gray-700 mb-4">העבודות שלי בוחנות את המתח בין אחיזה לשחרור, בין קו עדין לכאב עמוק. כאן תמצאו רישומים, וידאו, תיעוד תערוכות ועוד.</p>
+    </div>
+  </header>
+  
+  <main class="container mx-auto px-4">
+    <hr class="my-8">
+    <section class="artist-statement">
+      <h2 class="text-3xl font-bold mb-4 text-indigo-900">הצהרת אמנית</h2>
+      <p>העבודות שלי מאופיינות בקו עדין, הרמוני ונעים, שעומד בסתירה לתוכן המצוייר, שמתאר יחסים מורכבים שמבטאים בין היתר מצבים של טפילות, פלישה, וחוסר יציבות. הרישום מתעתע, מכיל הומור וכאב. הווידיאו תמיד ליווה את העבודה שלי מאחורי הקלעים, קל היה לי לחשוב בעזרתו ולזקק רעיונות אבל בסופו של דבר הצגתי את הרישומים, בתערוכה האחרונה שלי, לדוג את הטיפות שהצגתי בסיום התואר השני באורנים, הוידיאו קיבל מקום משמעותי, התחושות של הגוף שלי האוחז, מתאמץ, נאבק, מתעד. עזרו לי לדייק את העיסוק שלי בשאלה האחיזה, ובשאלות של שליטה ואובדן שליטה. אני עוסקת בפעולות פשוטות, מרימה את הטלפון ומתעדת, אבל אופן התיעוד והבחירה בנושא טומנות בתוכן תהליכים רגשיים ומורכבים, הקשורים לבנייה והרס גם יחד. החיפוש שלי מונע מתחושת "זמזום פנימי", תחושת דריכות, תזוזה, מאבק. בעבר ראיתי בזמזום הזה תופעה מסתורית, אך לאורך השנים גיליתי שהוא מגלם את המתח בין כוחות ההחזקה והרצון לשמוט. העבודות שלי נולדות מתוך תחושת ערפל, מתוך אי סדר, אני "פוגשת" את הדימוי פעם ראשונה על הדף- הוא לא נמצא אצלי בראש לפני-אני יוצרת קו ומגיבה אליו עד שאני מגלה את הדמות שמופיעה מולי. אני מרגישה שהעבודות שלי מיישירות מבט אל הכואב והפצוע בחברה שלנו, מתבוננות בסבל והתמודדות, אבל יש בקו העדין והנעים גם נחמה, יש ביופי של הוידיאו גם הרמוניה לצד הכאב, אני מביאה את הכאב כמו שהוא, מצד אחד נוכח, כבד ומגושם ומצד שני גם עטוף, ועדין.</p>
+    </section>
+    <hr class="my-8">
+    <section class="cv">
+      <h2 class="text-3xl font-bold mb-4 text-indigo-900">קורות חיים אמנותיים</h2>
+      <h3 class="text-xl font-semibold mt-4 mb-2">השכלה</h3>
+      <ul class="list-disc pr-6 mb-4">
+        <li>2023–2024 – תואר שני רב תחומי במסלול אמנית־מורה, המכללה האקדמית לחינוך אורנים</li>
+        <li>2012–2013 – לימודי המשך באמנות, המדרשה לאמנות, בית ברל</li>
+        <li>2006–2010 – B.Ed באמנות + תעודת הוראה (א–י"ב), המכון לאמנות, מכללת אורנים סיום בהצטיינות יתרה</li>
+      </ul>
+      <h3 class="text-xl font-semibold mt-4 mb-2">תערוכות נבחרות</h3>
+      <ul class="list-disc pr-6 mb-4">
+        <li>2024 – לדוג את הטיפות, תערוכת גמר תואר שני, אורנים | מנחה: הילה בן ארי | אוצר: פאריד אבו שאקרה</li>
+        <li>2018 – תחריטים – סדרות וספרי אמן, הגלריה לאמנות נצרת | אוצרת: טלי כהן גרבוז</li>
+        <li>2014 – אחיזה, גלריית החללית, תל אביב | אוצרת: שרי גולן</li>
+        <li>2013 – שששששש, הגלריה לאמנות ישראלית, כברי | אוצרת: דרורה דקל</li>
+        <li>2012 – Low Tech, ואדי ניסנאס, חיפה | אוצרות: דורית רינגרט ושרון פוליאקין</li>
+        <li>2011 – אבני רוח, גלריה דניאל, תל אביב | אוצר: שרון תובל</li>
+        <li>2011 – תערוכת תחריט, גלריה שהם, תל אביב | אוצרת: עדינה קיי</li>
+        <li>2010 – תערוכה זוגית, הגלריה העירונית ראשון לציון | אוצרת: אפי גן</li>
+        <li>2010 – לצלול עם מצופים, תערוכת גמר תואר ראשון, אורנים | אוצרת: ענת גטניו</li>
+      </ul>
+      <h3 class="text-xl font-semibold mt-4 mb-2">פרסים</h3>
+      <ul class="list-disc pr-6 mb-4">
+        <li>2010 – פרס קרן התרבות אמריקה–ישראל</li>
+      </ul>
+      <h3 class="text-xl font-semibold mt-4 mb-2">הרצאות / סדנאות</h3>
+      <ul class="list-disc pr-6 mb-4">
+        <li>2018 – הרצאה במכון הפסיכואנליטי, תל אביב בנושא רישום בספרי סקיצות</li>
+        <li>2023 – כנס לאומנות נשים ומגדר באוניברסיטת ת"א, הרצאה משותפת עם ד"ר אלה קריגר בנושא עבודת הדחפור</li>
+      </ul>
+      <h3 class="text-xl font-semibold mt-4 mb-2">אוספים</h3>
+      <p class="mb-4">עבודותיי נרכשו על ידי מספר אספנים פרטיים בישראל</p>
+    </section>
+    <hr class="my-8">
+    <section class="selected-works">
+      <h2 class="text-3xl font-bold mb-4 text-indigo-900">עבודות נבחרות</h2>
+      <ul class="list-disc pr-6 mb-4">
+        <li>שם התערוכה: "לצלול עם מצופים"- תערוכת בוגרות המכון לאומנות אורנים.</li>
+        <li>מיצב רישומי, 2010</li>
+        <li>טקסט הפרויקט כולל כמה מקבצים של רישומים.</li>
+        <li>רוב הרישומים נעשו בספרי סקיצות ברישום קווי של עט שחור על נייר.</li>
+        <li>בפרויקט מוצגים כ-70 רישומים שנבחרו מתוך כ-2,000 רישומים משלוש השנים האחרונות.</li>
+        <li>את הרישומים חילקנו לקבוצות: קבוצת האמהות, קבוצת הקרקס, קבוצת הדחויים וסדרת רישומים מספר סקיצות אחד. לקבוצות נוספו סדרת תחריטים שנעשו בשנה האחרונה ונתלו יחד עם הרישומים לפי הקבוצות.</li>
+        <li>בנוסף הוצגו ציור אישה על דלת. צמד מדפי ברזל עם נושאים ציוניים. שלוש עבודות רישום בתוכנת "פלאש". ועבודת פלסטלינה שנעשתה על קיר שבמרכזו קיר לבנים חשוף של לוליינית שהולכת על חבל לעבר לועו של תנין...</li>
+        <li>את הרישומים תליתי על שלושה קירות, חלקם היו ממוסגרים מסגרת לבנה ורובם מכוסים זכוכית בלבד.</li>
+        <li>רציתי ליצור תחושה בה האלמנטים המוצגים מרחפים בחלל, כמו תחושת הריחוף המאפיינת אותם כאשר הם מופיעים בספר הסקיצות שלי.</li>
+        <li>עבודות הרישום עטפו את החלל, הציור שעל הדלת מהווה מעבר מהרישום למדיומים האחרים שכולם רוכזו על קיר הכניסה.</li>
+      </ul>
+    </section>
+    <hr class="my-8">
+    <section>
+      <h3 class="text-2xl font-bold mb-6 text-indigo-800">תערוכות נבחרות</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Exhibition Card: לדוג את הטיפות -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow overflow-hidden flex flex-col">
+          <img src="drops-exhibition/Picture32.png" alt="לדוג את הטיפות" class="w-full h-56 object-cover">
+          <div class="p-6 flex-1 flex flex-col">
+            <h4 class="text-xl font-bold mb-2">לדוג את הטיפות, 2024</h4>
+            <p class="text-gray-700 mb-4 flex-1">וידאו ותיעוד הריסת הבית בקיבוץ, חקירה של זיכרון, פרידה, והתחלות חדשות.</p>
+            <button class="bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-600 transition info-btn" data-modal="modal-drops">מידע נוסף</button>
+          </div>
+        </div>
+        <!-- Exhibition Card: לולא היו דלתות כלל -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow overflow-hidden flex flex-col">
+          <img src="לולא היו דלתות כלל/6.jpg" alt="לולא היו דלתות כלל" class="w-full h-56 object-cover">
+          <div class="p-6 flex-1 flex flex-col">
+            <h4 class="text-xl font-bold mb-2">לולא היו דלתות כלל</h4>
+            <p class="text-gray-700 mb-4 flex-1">עבודות רדי מייד על דלתות, חקירה של חומרים, שכבות, וזיכרון.</p>
+            <button class="bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-600 transition info-btn" data-modal="modal-doors">מידע נוסף</button>
+          </div>
+        </div>
+        <!-- Exhibition Card: תינוק גדל באהבה -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow overflow-hidden flex flex-col">
+          <img src="תינוק גדל באהבה/1.png" alt="תינוק גדל באהבה" class="w-full h-56 object-cover">
+          <div class="p-6 flex-1 flex flex-col">
+            <h4 class="text-xl font-bold mb-2">תינוק גדל באהבה</h4>
+            <p class="text-gray-700 mb-4 flex-1">ספר מטופל, עט, טוש אקרילי, טיפקס ומדבקות על גבי דפי הספר. נובמבר 2023.</p>
+            <button class="bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-600 transition info-btn" data-modal="modal-baby">מידע נוסף</button>
+          </div>
+        </div>
+        <!-- Exhibition Card: הדחפור -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow overflow-hidden flex flex-col">
+          <img src="עבודה הדחפור 2021/dp.png" alt="הדחפור" class="w-full h-56 object-cover">
+          <div class="p-6 flex-1 flex flex-col">
+            <h4 class="text-xl font-bold mb-2">עבודה "הדחפור" 2021</h4>
+            <p class="text-gray-700 mb-4 flex-1">וידאו, 23 דקות. תיעוד הריסת הבית בו חייתי, חוויה של פרידה, תיעוד, והתחלות חדשות.</p>
+            <button class="bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-600 transition info-btn" data-modal="modal-dachpor">מידע נוסף</button>
+          </div>
+        </div>
+        <!-- Exhibition Card: לצלול עם מצופים -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow overflow-hidden flex flex-col">
+          <img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.27.28.png" alt="לצלול עם מצופים" class="w-full h-56 object-cover">
+          <div class="p-6 flex-1 flex flex-col">
+            <h4 class="text-xl font-bold mb-2">תערוכת הגמר - ״לצלול עם מצופים״</h4>
+            <p class="text-gray-700 mb-4 flex-1">מיצב רישומי, 2010. רישומים, תחריטים, עבודות דיגיטליות, ותחושת ריחוף.</p>
+            <button class="bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-600 transition info-btn" data-modal="modal-mitzufim">מידע נוסף</button>
+          </div>
+        </div>
+        <!-- Exhibition Card: שששששש -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow overflow-hidden flex flex-col">
+          <img src="שששששש/Screenshot 2024-04-25 at 13.58.50.png" alt="שששששש" class="w-full h-56 object-cover">
+          <div class="p-6 flex-1 flex flex-col">
+            <h4 class="text-xl font-bold mb-2">תערוכת יחיד - ״שששששש״</h4>
+            <p class="text-gray-700 mb-4 flex-1">גלריה לאומנות ישראלית - קיבוץ כברי - 2013. רישומים, עבודות קיר, ותחושת שקט.</p>
+            <button class="bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-600 transition info-btn" data-modal="modal-shesh">מידע נוסף</button>
+          </div>
         </div>
       </div>
-    </div>
-    <div id="custom-modal-mitzufim" class="modal-overlay" style="display:none;">
-      <div class="modal-content">
-        <button id="close-modal-btn-mitzufim" class="close-btn" aria-label="סגור">&times;</button>
-        <div class="modal-text">
-          <p>
-            לעמוד יציבה כשהם באים<br>
-            לשלוח יד ולשלחם לכיוון אחר.<br>
-            לשמור על קור רוח, כמו לוחמת טאי צ'י.<br>
-            ניגוד של רצונות.<br>
-            לצלול לעומק<br>
-            ולהתעטף באוויר מכף רגל ועד ראש<br>
-            פעם נחנקתי<br>
-            היום אני שומרת את התחושה בין הכתפיים<br>
-            קרוב ללב<br>
-            כדי שאזכור: לא להיחנק שוב.
-          </p>
-        </div>
+    </section>
+  
+  </main>
+  <!-- Modals -->
+  <div id="modal-drops" class="modal-overlay">
+    <div class="modal-content">
+      <button class="close-btn" aria-label="סגור">&times;</button>
+      <h4 class="text-lg font-bold mb-2">לדוג את הטיפות</h4>
+      <p class="text-gray-700 mb-4">
+        לדוג את הטיפות<br>
+אני מתבוננת דרך עדשת מצלמת הוידיאו (שבטלפון שלי) על דחפור שהורס בית בקיבוצי, כחלק מפרויקט פינוי בינוי, בית שבו התגוררתי תקופה משמעותית בחיי. מסע שהתחיל כשהתחלתי את לימודי, לפני שלוש שנים, לקח אותי דרך עבודת הוידאו לחקור את משמעות החזקת כלי היצירה -מצלמה או עט, כפרקטיקות המלוות אותי לאורך השנים. כשאחזתי את המצלמה חשתי את המטען החשמלי בגוף והרגשתי שדרך הקיפאון של הגוף והאחיזה במצלמה אני חווה תחושה זהה לזאת שאני חשה בעת הרישום. <br> ההתבוננות בערימה המשתנה שהבית הפך להיות, גרמה לי לחקור את נושא השכבות, קודם בתחריט ולאחר מכן ברישום של עט, מדבקות לבנות וטיפקס. <br> בעבודתי אני חוקרת מערכות יחסים שהגבולות בהן לא ברורים, אני מתייחסת למצבים של פולשנות וטפילות, אי-יציבות, תעתוע, חוסר עקביות, ערעור הקרקע והיסודות. אני מנסה לעבד את החוויה הגופנית שנעה על הציר בין להחזיק ולשמוט.<br> באמצעות רישום המערב חומרים שונים אני בוחנת גבולות ופריצתם. מעניינים אותי שאריות המאבק והסימנים שנשארים כשקו או כתם פולשים למרחב חדש, מעניינות אותי המחיקות ויצירת הדימוי הסופי מתוך "מאבקים" המתקיימים על הנייר. מעניין אותי המחול הזה שמתרחש בין הראש לבין הלב בתהליך הרישום שלי. אני חשה דיאלוג בין אינטואיציה חזקה לבין הכרעות שמתקבלות, בין היצירה האינטואיטיבית והטביעה בכאוס לבין המחשבה על הדימוי המתקיימת בו בזמן. <br> אני תוהה מה מן הדיאלוג הזה עובר לצופה?
+      </p>
+      <div class="grid grid-cols-2 gap-2 mb-2">
+        <img src="drops-exhibition/Picture32.png" alt="לדוג את הטיפות 1" class="rounded shadow">
+        <img src="drops-exhibition/Picture33.png" alt="לדוג את הטיפות 2" class="rounded shadow">
+        <img src="drops-exhibition/Picture35.png" alt="לדוג את הטיפות 3" class="rounded shadow">
+        <img src="drops-exhibition/Picture37.png" alt="לדוג את הטיפות 4" class="rounded shadow">
+        <img src="drops-exhibition/Picture39.png" alt="לדוג את הטיפות 5" class="rounded shadow">
+        <img src="drops-exhibition/Picture41.png" alt="לדוג את הטיפות 6" class="rounded shadow">
+        <img src="drops-exhibition/Picture42.png" alt="לדוג את הטיפות 7" class="rounded shadow">
+        <img src="drops-exhibition/Picture43.png" alt="לדוג את הטיפות 8" class="rounded shadow">
+        <img src="drops-exhibition/Picture44.png" alt="לדוג את הטיפות 9" class="rounded shadow">
+        <img src="drops-exhibition/Picture45.png" alt="לדוג את הטיפות 10" class="rounded shadow">
       </div>
     </div>
-    <div id="custom-modal-dachpor" class="modal-overlay" style="display:none;">
-      <div class="modal-content">
-        <button id="close-modal-btn-dachpor" class="close-btn" aria-label="סגור">&times;</button>
-        <div class="modal-text">
-          <p>
+  </div>
+  <div id="modal-doors" class="modal-overlay">
+    <div class="modal-content">
+      <button class="close-btn" aria-label="סגור">&times;</button>
+      <h4 class="text-lg font-bold mb-2">לולא היו דלתות כלל</h4>
+      <p class="text-gray-700 mb-4">
+        בתערוכה זו עבדתי בהשראת השם שנבחר לתערוכה ויצרתי עבודות רדי מייד על גבי דלתות שמצאתי באתר בנייה בקיבוץ – דלתות שירותים צרות ששימשו את חדרי הצעירים. השתמשתי בטכניקת עבודה שפתחתי, המבוססת על שכבות של רישום, מדבקות וטיפקס, אך הפעם על מצע שונה – חומר תעשייתי, גודל חריג ואופי אחר. שמרתי על קצב עבודה מהיר, אינטואיטיבי. עבודות הנייר הוצגו על גבי דלתות של ארונות חשמל שהיו קיימות בחלל הגלריה.
+      </p>
+      <div class="grid grid-cols-2 gap-2 mb-2">
+        <img src="לולא היו דלתות כלל/6.jpg" alt="לולא היו דלתות כלל 1" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/1.jpg" alt="לולא היו דלתות כלל 2" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/2.png" alt="לולא היו דלתות כלל 3" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/3.png" alt="לולא היו דלתות כלל 4" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/5.jpg" alt="לולא היו דלתות כלל 5" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/8.png" alt="לולא היו דלתות כלל 6" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/9.jpg" alt="לולא היו דלתות כלל 7" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/10.jpg" alt="לולא היו דלתות כלל 8" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/11.jpg" alt="לולא היו דלתות כלל 9" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/12.png" alt="לולא היו דלתות כלל 10" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/13.png" alt="לולא היו דלתות כלל 11" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/14.png" alt="לולא היו דלתות כלל 12" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/15.png" alt="לולא היו דלתות כלל 13" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/16.png" alt="לולא היו דלתות כלל 14" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/17.jpg" alt="לולא היו דלתות כלל 15" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/18.jpg" alt="לולא היו דלתות כלל 16" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/19.png" alt="לולא היו דלתות כלל 17" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/20.png" alt="לולא היו דלתות כלל 18" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/21.png" alt="לולא היו דלתות כלל 19" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/22.png" alt="לולא היו דלתות כלל 20" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/23.png" alt="לולא היו דלתות כלל 21" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/24.png" alt="לולא היו דלתות כלל 22" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/25.jpg" alt="לולא היו דלתות כלל 23" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/26.jpg" alt="לולא היו דלתות כלל 24" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/27.jpg" alt="לולא היו דלתות כלל 25" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/28.png" alt="לולא היו דלתות כלל 26" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/29.png" alt="לולא היו דלתות כלל 27" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/30.png" alt="לולא היו דלתות כלל 28" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/31.png" alt="לולא היו דלתות כלל 29" class="rounded shadow">
+        <img src="לולא היו דלתות כלל/7.png" alt="לולא היו דלתות כלל 30" class="rounded shadow col-span-2">
+      </div>
+    </div>
+  </div>
+  <div id="modal-baby" class="modal-overlay">
+    <div class="modal-content">
+      <button class="close-btn" aria-label="סגור">&times;</button>
+      <h4 class="text-lg font-bold mb-2">תינוק גדל באהבה</h4>
+      <p class="text-gray-700 mb-4">
+        "תינוק גדל באהבה", ספר מטופל, עט, טוש אקרילי, טיפקס ומדבקות על גבי דפי הספר. 25*20 ס"מ, נובמבר 2023. את הספר יצרתי אחרי קיפאון של כמה שבועות, בתגובה לטבח ה-7.10
+      </p>
+      <div class="grid grid-cols-2 gap-2 mb-2">
+        <img src="תינוק גדל באהבה/1.png" alt="תינוק גדל באהבה 1" class="rounded shadow">
+        <img src="תינוק גדל באהבה/2.png" alt="תינוק גדל באהבה 2" class="rounded shadow">
+        <img src="תינוק גדל באהבה/3.png" alt="תינוק גדל באהבה 3" class="rounded shadow">
+        <img src="תינוק גדל באהבה/4.png" alt="תינוק גדל באהבה 4" class="rounded shadow">
+        <img src="תינוק גדל באהבה/5.png" alt="תינוק גדל באהבה 5" class="rounded shadow">
+        <img src="תינוק גדל באהבה/6.png" alt="תינוק גדל באהבה 6" class="rounded shadow">
+        <img src="תינוק גדל באהבה/7.png" alt="תינוק גדל באהבה 7" class="rounded shadow">
+        <img src="תינוק גדל באהבה/8.png" alt="תינוק גדל באהבה 8" class="rounded shadow">
+        <img src="תינוק גדל באהבה/9.png" alt="תינוק גדל באהבה 9" class="rounded shadow">
+        <img src="תינוק גדל באהבה/10.png" alt="תינוק גדל באהבה 10" class="rounded shadow">
+        <img src="תינוק גדל באהבה/11.png" alt="תינוק גדל באהבה 11" class="rounded shadow">
+        <img src="תינוק גדל באהבה/12.png" alt="תינוק גדל באהבה 12" class="rounded shadow">
+        <img src="תינוק גדל באהבה/13.png" alt="תינוק גדל באהבה 13" class="rounded shadow">
+        <img src="תינוק גדל באהבה/14.png" alt="תינוק גדל באהבה 14" class="rounded shadow">
+        <img src="תינוק גדל באהבה/15.png" alt="תינוק גדל באהבה 15" class="rounded shadow">
+        <img src="תינוק גדל באהבה/16.png" alt="תינוק גדל באהבה 16" class="rounded shadow">
+        <img src="תינוק גדל באהבה/17.png" alt="תינוק גדל באהבה 17" class="rounded shadow">
+        <img src="תינוק גדל באהבה/18.png" alt="תינוק גדל באהבה 18" class="rounded shadow">
+        <img src="תינוק גדל באהבה/19.png" alt="תינוק גדל באהבה 19" class="rounded shadow">
+      </div>
+    </div>
+  </div>
+  <div id="modal-dachpor" class="modal-overlay">
+    <div class="modal-content">
+      <button class="close-btn" aria-label="סגור">&times;</button>
+      <h4 class="text-lg font-bold mb-2">עבודה "הדחפור" 2021</h4>
+      <p class="text-gray-700 mb-4">
+        הדחפור (וידאו), 23 דקות, 2021<br>
+תיעוד וידאו של הריסת הבית בו חייתי בתקופה משמעותית בחיי, שנהרס במסגרת פרויקט פינוי-בינוי בקיבוץ. העבודה נעשתה באמצעות טלפון נייד וללא חצובה, מתוך בחירה לתעד עם הכלי הזמין והאישי ביותר. עמדתי ללא תנועה, גוף קפוא, מצלמה ביד, בתפקיד של עדה למופע של פירוק והיעלמות. העבודה הוצגה בתערוכה קבוצתית בגרנדה- ספרד, והרצתי עליה בשיתוף עם ד"ר אלה קריגר בכנס של העמותה לחקר נשים ומגדר באוניברסיטת תל אביב.<br><br>
 ברגע שהוחלט בקיבוץ שלי על פינוי בינוי מצאתי את עצמי מתעדת את מהשהיה לפני, הולכת בשבילים ומצלמת, נפרדת מהנוף שחקוק בבשר, לאט לאט נעטפה הגבעהבגדר לבנה גבוהה, וחסמה את הגישה לאזור, בשביל לראות מה קורה בפנים צריך היה להיכנסמהשער הראשי, יחד עם המשאיות והטרקטורים והדחפור הגדול והייתי שם במקרה ברגע שבוהוא הגיע והרעיד את האדמה סביבו, גם אותי שעמדתי קרוב, ונמשכתי אחריו, התחלתי לתעדאת פעולת ההרס שלו עוד לפני שהבנתי למה או מה בדיוק אני עושה.זאת הפעם הראשונה שאני בוחרת לתעד בוידאו למטרה אומנותית, (הייתיאחראית על מגזין הוידיאו של הקיבוץ למשך שנתיים שם עסקתי בתיעוד של הקיבוץ באופניםשונים) ואופן התיעוד הזה התברר לי כמדויק. אני בדרך כלל רושמת. בוחנת דרך קו חווייתחיים של תלות באדם אחר, בצורך להיות מוחזקת ובקושי של האדם האחר להחזיק לאורך זמן,בהתמסרות מוחלטת מול כעס וכישלון. מערכות יחסים שהגבולות בהן לא ברורים, שגוף אחד פולשלאחר ותופס את מקומו בעולם, טפילות, אי יציבות, ערעור הקרקע והיסודות. אבל הפעם אותהתחושה שהיתה מלווה אותי כשהייתי רושמת הובילה אותי לתעד.עשרות בתים נשברו ונהרסו, הגבעה כבר הייתה חשופה לגמרי מבתים ונשארבית אחד אחרון שבמקרה עוד לא נהרס, בית קטן בקצה השטח, שכאילו שכחו אותו, הבנתי שמדובר בבית שגרתי בו עדלפני ארבע שנים, דירת שני חדרים שהתחילה בתור סטודיו עם ספה ומקום לישון, חלל עמוסבכמויות של חומרי יצירה שבקושי השאיר לי מקום להיות, שם גיליתי שאני בהריון וחומריהיצירה פינו את מקומם לילד האהוב שלי ולתוך החלל הזה נכנס גם בן הזוג שלי שעבדמהבית והיינו צריכים למצוא לו מקום לעבוד. זה היה בית שאהבתי ומצד שני היה צפוףודחוס לזוג עם תינוק, לעבודה מהבית. מין בית מרוכז כזה. גם ההיסטוריה שלו הייתה כזאת,הוא היה הבית של אחת ממיסדות הקיבוץ ביקשתי שידחו את ההריסה ביוםכדי שאוכל להגיע לתעד והם חיכו לי. ובבוקר ההריסה הגעתי מוקדם וחיכיתי, עשיתי המוןחזרות אבל שני דברים היו לי ברורים, אני לא מביאה ציוד מקצועי, זה יהיה צילום בכליהזמין והפשוט ביותר- הטלפון שלי וללא חצובה.החזקתי את הנשימה, קיבעתי את הזרתות, הקפאתי את הגוף. לא ידעתי למהלצפות- כמה זמן זה ייקח לפרק את הבית הקטן שלי. זה לקח 23 דקות. המשכתי אתהפרקטיקה הזאת כל פעם שמשאית הגיעה ויצאה, שטרקטור הגיע, עקבתי אחרי ערימת הבית שלי מתפנה ונעלמת בגוףקפוא. מחזיק. בתחושה הייתי בתפקיד. המאבק מייצר התעוררות פנימית חזקה: התנגדות, כניעה, התמסרות, קושי, זרימה,כל אלה קורים בזמן שאני עומדת ללא תזוזה. בפעולה הזאת בעיקר עמדתי והקשבתי, הקשבתי לקולות בפנים, הרגשתי אתהדחף לזוז והדפתי אותו, הקשבתי לקולות בחוץ, לקולות הטרקטורים והדחפורים והמשאיות,לצעקות ולשריקות של אתר הבנייה, וניסיתי להיות כמה שפחות מורגשת. צילמתי אותו לפניההריסה, צילמתי אותו נהרס, וצילמתי אותו נעלם לאט לאט לתוך המון המון משאיות.עדשחזרה הגבעה המקורית עליה בנו אותו.הסתכלתי על כף, שעושה פעולה של הרס, והיא אסטתית כל כך, והיא נראיתמלטפת אפילו, אימצתי את הרגע הזה אליי, למקום מאוד פרטי, לדיבור פרטי, לרגש עדין,לניואנסים דקים למרות שמולי התחוללה דרמה גדולה.המפעיל, איש מיומן מאוד,סיפר לי שהוא התחיל לעבוד בתחום בפינוי ימית, קראו לו לעשות את ההריסות הרגישותביותר, זה היה לו קשה רגשית להרוס בתים שאנשים לא רצו שייהרסו ומאז קבע לעצמו כללשהוא הורס רק בתים שאנשים רוצים להרוס ולא הרס בכפייה. גם בשבילי העבודה הזאת נגעהכנראה גם במקומות קודמים שנכחתי בהם כשפירקו בכוח, ומול הכוח בלטה לי הפעולהשמזכירה כל כך ליטוף עדין, המקום הזה של פירוק בהסכמה והשאלה של מי ההסכמה, ומההתפקיד של הצופה במופע כזה. 
-          </p>
-        </div>
+      </p>
+      <div class="grid grid-cols-1 gap-4 mb-2">
+        <video controls class="w-full rounded shadow">
+          <source src="עבודה הדחפור 2021/d3.mp4" type="video/mp4">
+          הדפדפן שלך אינו תומך בניגון וידאו.
+        </video>
+        <video controls class="w-full rounded shadow">
+          <source src="עבודה הדחפור 2021/d1.mp4" type="video/mp4">
+          הדפדפן שלך אינו תומך בניגון וידאו.
+        </video>
+        <video controls class="w-full rounded shadow">
+          <source src="עבודה הדחפור 2021/d2.mp4" type="video/mp4">
+          הדפדפן שלך אינו תומך בניגון וידאו.
+        </video>
       </div>
     </div>
-    <footer>
-        <p>© מיטל סעדון</p>
-    </footer>
-    <script>
-      const toggleBtn = document.getElementById('theme-toggle');
-      const themeIcon = document.getElementById('theme-icon');
-      const body = document.body;
-      const sunSVG = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-8.66l-.71.71M4.05 19.07l-.71-.71M21 12h-1M4 12H3m16.66-4.66l-.71-.71M4.05 4.93l-.71.71M12 5a7 7 0 100 14 7 7 0 000-14z" /></svg>`;
-      const moonSVG = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 dark:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" /></svg>`;
-      function setThemeIcon(isLight) {
-        themeIcon.innerHTML = isLight ? sunSVG : moonSVG;
-      }
-      if (localStorage.getItem('theme') === 'light') {
-        body.classList.add('light-mode');
-        body.classList.remove('dark');
-        setThemeIcon(true);
-      } else {
-        body.classList.remove('light-mode');
-        body.classList.add('dark');
-        setThemeIcon(false);
-      }
-      toggleBtn.addEventListener('click', () => {
-        const isLight = !body.classList.contains('light-mode');
-        body.classList.toggle('light-mode');
-        body.classList.toggle('dark');
-        setThemeIcon(isLight);
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  </div>
+  <div id="modal-mitzufim" class="modal-overlay">
+    <div class="modal-content">
+      <button class="close-btn" aria-label="סגור">&times;</button>
+      <h4 class="text-lg font-bold mb-2">תערוכת הגמר - ״לצלול עם מצופים״</h4>
+      <p class="text-gray-700 mb-4">
+        לעמוד יציבה כשהם באים<br>
+        לשלוח יד ולשלחם לכיוון אחר.<br>
+        לשמור על קור רוח, כמו לוחמת טאי צ'י.<br>
+        ניגוד של רצונות.<br>
+        לצלול לעומק<br>
+        ולהתעטף באוויר מכף רגל ועד ראש<br>
+        פעם נחנקתי<br>
+        היום אני שומרת את התחושה בין הכתפיים<br>
+        קרוב ללב<br>
+        כדי שאזכור: לא להיחנק שוב.
+      </p>
+      <div class="grid grid-cols-2 gap-2 mb-2">
+        <img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.27.28.png" alt="לצלול עם מצופים 1" class="rounded shadow">
+        <img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.27.21.png" alt="לצלול עם מצופים 2" class="rounded shadow">
+        <img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.27.49.png" alt="לצלול עם מצופים 3" class="rounded shadow">
+        <img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.27.53.png" alt="לצלול עם מצופים 4" class="rounded shadow">
+        <img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.27.59.png" alt="לצלול עם מצופים 5" class="rounded shadow">
+        <img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.08.png" alt="לצלול עם מצופים 6" class="rounded shadow">
+        <img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.14.png" alt="לצלול עם מצופים 7" class="rounded shadow">
+        <img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.22.png" alt="לצלול עם מצופים 8" class="rounded shadow">
+        <img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.27.png" alt="לצלול עם מצופים 9" class="rounded shadow">
+        <img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.36.png" alt="לצלול עם מצופים 10" class="rounded shadow">
+        <img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.45.png" alt="לצלול עם מצופים 11" class="rounded shadow">
+        <img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.58.png" alt="לצלול עם מצופים 12" class="rounded shadow">
+        <img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.29.05.png" alt="לצלול עם מצופים 13" class="rounded shadow">
+        <img src="לצלול עם מצופים/Screenshot 2024-04-25 at 14.28.53.png" alt="לצלול עם מצופים collage" class="rounded shadow col-span-2">
+      </div>
+    </div>
+  </div>
+  <div id="modal-shesh" class="modal-overlay">
+    <div class="modal-content">
+      <button class="close-btn" aria-label="סגור">&times;</button>
+      <h4 class="text-lg font-bold mb-2">תערוכת יחיד - ״שששששש״</h4>
+      <p class="text-gray-700 mb-4">
+        גלריה לאומנות ישראלית - קיבוץ כברי - 2013. רישומים, עבודות קיר, ותחושת שקט.
+      </p>
+      <div class="grid grid-cols-2 gap-2 mb-2">
+        <img src="שששששש/Screenshot 2024-04-25 at 13.58.50.png" alt="שששששש 1" class="rounded shadow">
+        <img src="שששששש/Screenshot 2024-04-25 at 13.58.06.png" alt="שששששש 2" class="rounded shadow">
+        <img src="שששששש/Screenshot 2024-04-25 at 14.00.08.png" alt="שששששש 3" class="rounded shadow">
+        <img src="שששששש/Screenshot 2024-04-25 at 14.00.25.png" alt="שששששש 4" class="rounded shadow">
+        <img src="שששששש/Screenshot 2024-04-25 at 14.25.11.png" alt="שששששש 5" class="rounded shadow">
+        <img src="שששששש/Screenshot 2024-04-25 at 14.25.25.png" alt="שששששש 6" class="rounded shadow">
+        <img src="שששששש/Screenshot 2024-04-25 at 14.25.50.png" alt="שששששש 7" class="rounded shadow">
+        <img src="שששששש/Screenshot 2024-04-25 at 14.26.02.png" alt="שששששש 8" class="rounded shadow">
+        <img src="שששששש/Screenshot 2024-04-25 at 14.26.44.png" alt="שששששש collage" class="rounded shadow col-span-2">
+        <img src="שששששש/Screenshot 2024-04-25 at 14.26.59.png" alt="שששששש 9" class="rounded shadow">
+      </div>
+    </div>
+  </div>
+  <footer class="mt-16 py-8 text-center text-gray-500">
+    © מיטל סעדון
+  </footer>
+  <!-- Modal Script -->
+  <script>
+    document.querySelectorAll('.info-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.getElementById(this.dataset.modal).classList.add('active');
       });
-    </script>
-    <script>
-      const openModalBtn = document.getElementById('open-modal-btn');
-      const closeModalBtn = document.getElementById('close-modal-btn');
-      const customModal = document.getElementById('custom-modal');
-      if (openModalBtn && closeModalBtn && customModal) {
-        openModalBtn.onclick = function() {
-          customModal.style.display = 'flex';
-        };
-        closeModalBtn.onclick = function() {
-          customModal.style.display = 'none';
-        };
-        customModal.onclick = function(e) {
-          if (e.target === customModal) customModal.style.display = 'none';
-        };
-      }
-    </script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const openModalBtnMitzufim = document.getElementById('open-modal-btn-mitzufim');
-      const closeModalBtnMitzufim = document.getElementById('close-modal-btn-mitzufim');
-      const customModalMitzufim = document.getElementById('custom-modal-mitzufim');
-      if (openModalBtnMitzufim && closeModalBtnMitzufim && customModalMitzufim) {
-        openModalBtnMitzufim.onclick = function() {
-          customModalMitzufim.style.display = 'flex';
-        };
-        closeModalBtnMitzufim.onclick = function() {
-          customModalMitzufim.style.display = 'none';
-        };
-        customModalMitzufim.onclick = function(e) {
-          if (e.target === customModalMitzufim) customModalMitzufim.style.display = 'none';
-        };
-      }
     });
-    </script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const openModalBtnDachpor = document.getElementById('open-modal-btn-dachpor');
-      const closeModalBtnDachpor = document.getElementById('close-modal-btn-dachpor');
-      const customModalDachpor = document.getElementById('custom-modal-dachpor');
-      if (openModalBtnDachpor && closeModalBtnDachpor && customModalDachpor) {
-        openModalBtnDachpor.onclick = function() {
-          customModalDachpor.style.display = 'flex';
-        };
-        closeModalBtnDachpor.onclick = function() {
-          customModalDachpor.style.display = 'none';
-        };
-        customModalDachpor.onclick = function(e) {
-          if (e.target === customModalDachpor) customModalDachpor.style.display = 'none';
-        };
-      }
+    document.querySelectorAll('.close-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.closest('.modal-overlay').classList.remove('active');
+      });
     });
-    </script>
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === this) this.classList.remove('active');
+      });
+    });
+  </script>
+  <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const body = document.body;
+    const sunSVG = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-8.66l-.71.71M4.05 19.07l-.71-.71M21 12h-1M4 12H3m16.66-4.66l-.71-.71M4.05 4.93l-.71.71M12 5a7 7 0 100 14 7 7 0 000-14z" /></svg>`;
+    const moonSVG = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 dark:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" /></svg>`;
+    function setThemeIcon(isLight) {
+      themeIcon.innerHTML = isLight ? sunSVG : moonSVG;
+    }
+    if (localStorage.getItem('theme') === 'light') {
+      body.classList.add('light-mode');
+      body.classList.remove('dark');
+      setThemeIcon(true);
+    } else {
+      body.classList.remove('light-mode');
+      body.classList.add('dark');
+      setThemeIcon(false);
+    }
+    toggleBtn.addEventListener('click', () => {
+      const isLight = !body.classList.contains('light-mode');
+      body.classList.toggle('light-mode');
+      body.classList.toggle('dark');
+      setThemeIcon(isLight);
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+  </script>
 </body>
 </html> 
